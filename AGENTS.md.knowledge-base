@@ -1,7 +1,0 @@
-# Agent 接手说明 · 豚豚插画 Skill
-
-1. 先读 [[📋 使用规范]] 与本目录 `spec.md`。
-2. 生成豚豚插画时，优先读本目录 `SKILL.md`、`references/tuntun-character-positioning.md`、`references/tuntun-composition-patterns.md` 与 `references/tuntun-qa-checklist.md`，不要混用扁平描边风。
-3. 角色特征以 `references/character-bible.md` 与 `assets/examples/tunshuo-official-flat.png` 为准；质感以毛茸茸 3D 为准。
-4. 任务库 / 作战台只由小黑写入；本项目文件可由负责视觉 / Skill 的 Agent 更新，并登记当月变更日志。
-5. 需要 Codex 继续打磨时，直接使用 `Codex制作提示词.md`。
