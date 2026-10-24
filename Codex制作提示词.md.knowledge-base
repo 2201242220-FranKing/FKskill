@@ -1,0 +1,72 @@
+---
+title: Codex制作提示词 · 豚说插图Skill
+type: prompt
+status: active
+created: 2026-10-14
+updated: 2026-10-19
+---
+
+# 发给 Codex 的提示词（可直接复制）
+
+请把下面整段发给 Codex：
+
+---
+
+你要在我的 Obsidian 知识库里，把「豚说插图 Skill」打磨成可安装、可复用的正式版。
+
+## 工作目录（真源）
+
+`04-氛围编程/豚说插图Skill/`
+
+先读：
+
+1. `spec.md`
+2. 现有 `SKILL.md` 与 `references/*`
+3. 参考项目（对照学结构，不要照抄角色）：
+   - `06-归档/2026-10-19_小灰活泼正文配图Skill/`（尤其 SKILL.md、references/、spec.md）
+   - `05-项目/iwan-xiaohei-illustrations/`（小黑怪诞正文配图，结构同源）
+4. Punk 方法论参考（学流程，不要复制其商用风格库原文当自己的付费资产）：
+   - `04-氛围编程/Skill汇总/2.外部下载skill/Punk-Skill(adrianpunk).md`
+   - 若本机有 Punk-Skill 原件：`skills/punk-cover/SKILL.md`、`skills/punk-avatar/SKILL.md`、对应 `references/*`
+5. 官方扁平 IP 参考图：`assets/examples/tunshuo-official-flat.png`
+6. 已确认方向的毛茸茸试稿：`assets/examples/fluffy-avatar-v4.png`
+
+也请扫一眼已有相关 skill，避免重复：`04-氛围编程/Skill汇总/1.个人自建skill/xiaohaitun-ip-generator(小金).md` 及其原件路径。
+
+## 目标
+
+产出一个专属于「豚说」IP 的插图 Skill，能力覆盖：头像、Banner、封面、场景图、贴纸。
+
+硬约束：
+
+- 角色：圆脑袋 + 天蓝色海豚头套 + 头套前额两颗小黑点眼 + 左上背鳍 + 白脸黑点眼粉腮红 + 身体蓝白斜切 + 胸口蓝色椭圆徽章内白色手写 φ
+- 质感：毛茸茸 3D 潮玩公仔；**禁止**默认扁平粗描边版
+- 默认去掉水滴；墨镜等配件仅用户明确要求时加
+- 学 Punk：风格/角色原子与「用途形状」分离；最终提示词必须融合；缺构图/用途时先问 2–3 选项再停；先落盘 prompt 再出图
+- 学小黑/小灰：补齐 IP 设定、风格 DNA、构图模式、prompt 模板、QA checklist、示例资产约定
+
+## 你要完成的交付
+
+1. 重写并完善本目录 `SKILL.md`（frontmatter name/description 清晰，中文主流程）。
+2. 补齐 `references/`（可重命名，但至少覆盖）：
+   - character / IP bible
+   - style dna（毛茸茸 3D）
+   - scene / composition catalog
+   - prompt blueprint / template
+   - qa-checklist
+3. 更新 `spec.md` 的「当前状态」勾选与结构说明。
+4. 如有必要，新增 `assets/examples/README.md` 说明示例图用途。
+5. 产出一份「最小验收记录」：用本 Skill 流程说明如何生成头像、1:1 封面、16:9 Banner 各一张（可只写 prompt 与验收标准；若环境能生图则生成）。
+6. 遵守知识库规范：新建/修改后在 `00-系统记录/2026-10_知识库变更日志.md` 追加摘要；**不要改** `📌 当前作战台.md` 和 `00-系统记录/任务库.md`（那两处只由小黑写）。
+
+## 验收标准
+
+- 任意 Agent 只读本目录就能稳定画出可辨认的豚说 IP。
+- 缩到头像尺寸仍能认出海豚头套与天蓝配色。
+- φ 标字形接近官方扁平稿，不被改成其他字母。
+- 不出现扁平默认风、水滴默认件、乱加墨镜。
+- 文档里写清楚与 `xiaohaitun-ip-generator`、Punk Skill 的边界：本 Skill 负责豚说品牌插图生产；前者偏角色卡生成；Punk 是方法论参考。
+
+完成后用简短中文汇报：改了哪些文件、还缺什么、建议的安装路径（Cursor/Codex skills 目录）。
+
+---
