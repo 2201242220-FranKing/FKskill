@@ -65,7 +65,7 @@ description: >-
 
 5. **落盘再出图**
    - 保存 `tunshuo-assets/{slug}/prompts/illustration.md`。
-   - **图生图必须带参考图**：`image1` / `input_image` 传入 `assets/references/` 中实际存在的文件，优先选择最接近目标动作的 pose；如果接口支持 `input_fidelity`，设为 `high`。若模型已对图像输入默认高保真，则不要传不支持的参数。
+   - **图生图必须带参考图**：先按 `references/reference-image-protocol.md` 做生成前检查，再把 `assets/references/` 中实际存在的图片作为当前工具规定的真实图像附件/输入字段传入。不能只在提示词里写 `image1`、`input_image` 或文件路径；如果无法确认图片随请求发送，就停止最终出图。只有工具明确支持时才设置 `input_fidelity: high`。
    - 生成器不接受图像输入时，停止最终出图，不退回纯文生图冒充完成；可以只交付提示词草稿。
    - 生成后存 `tunshuo-assets/{slug}/illustration.png`，文件名不要留生图工具的长默认名。
    - 头像需求：另裁 800×800 正方形安全构图（头与徽章居中）。
@@ -112,4 +112,3 @@ description: >-
 | 平台目录 | scene-catalog 用途目录 |
 | 缺风格就停 | 缺构图或缺图像输入就停 |
 | 融合提示词 | 两段式身份锁定 + 动作场景融合 |
-```

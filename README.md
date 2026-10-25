@@ -16,6 +16,8 @@
 
 让 Agent 先读取 `SKILL.md`、`references/character-bible.md` 和 `references/reference-image-protocol.md`，再根据用途读取其他 `references/`、`styles/` 和 `assets/references/`。
 
+生成前必须确认当前模型支持图生图，并在实际调用参数或附件中核验参考图已经发送。WorkBuddy 的 Agnes 图改图使用 `agnes-image-2.0-flash`，参考图通过工具规定的 `extra_body.image` URL 数组传入；只有上传流程确实提供可访问 URL 时才执行。纯文生图、无法确认图片是否随请求发送，或只在提示词里写文件路径时，只交付提示词草稿，不把结果标为合格出图。
+
 适用：正文配图、公众号封面、小红书封面、X 封面、活动海报、Banner、个人知识库和 AI 工具主题插画。
 
 ## 目录
