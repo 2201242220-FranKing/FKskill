@@ -1,8 +1,8 @@
-# 毛绒 3D 豚豚视觉规则
+# 毛毡短绒 3D 豚豚视觉规则
 
 ## 视觉目标
 
-以用户桌面 IP 参考图为身份基准，呈现细密短绒、柔和体积光、轻微怪诞的物理隐喻和充足留白。画面像一张有想法的内容插画，不像产品广告或 PPT。
+以 `assets/references/` 的实际输入图为身份基准，呈现细腻毛毡 / 麂皮短绒、平滑柔和表面、轻微边缘绒毛、柔和体积光和充足留白。画面像一张有想法的内容插画，不像产品广告或 PPT。不要把“毛绒”理解成长毛蓬松玩具。
 
 ## 构图
 
@@ -13,4 +13,4 @@
 
 ## 提示词片段
 
-`fluffy 3D mascot, soft short plush fibers, gentle studio light, clean negative space, slightly surreal physical metaphor, calm pastel blue and white palette, central badge visible, no water droplet, no flat vector, no childish commercial poster, no PPT layout`
+`reference-image-driven 3D mascot, fine felt or suede short nap, smooth soft surface, subtle fuzzy edge, gentle studio light, clean negative space, slightly surreal physical metaphor, calm sky-blue and cream palette, three-layer circular badge visible, pure sky-blue body, no water droplet, no long fluffy fur, no flat vector, no childish commercial poster, no PPT layout`
