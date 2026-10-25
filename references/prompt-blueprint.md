@@ -1,23 +1,38 @@
+---
+title: 豚说插图提示词蓝图
+created: 2026-10-25
+updated: 2026-10-26
+---
+
 # 豚说插图提示词蓝图
 
 最终 `prompts/illustration.md` 是一份可直接交给生图工具的融合提示词，由连续的两段组成：第一段锁定参考图身份，第二段只改变动作与场景。不要另附会冲突的角色设定附录。
+
+调用生图工具前，Agent 在提示词之外完成这份记录；不要把记录当作图片提示词提交：
+
+- 实际使用的参考图文件：{reference_image_filename}
+- 当前生图工具 / 模型：{tool_and_model}
+- 工具文档规定的图像输入字段或附件：{actual_image_input_method}
+- 调用参数 / 附件中已确认包含这张参考图：是 / 否
+- 如果不是“是”，停止最终出图；不要仅凭提示词里的文件名或文字宣称已上传。
+- 只有工具文档明确支持时，才设置高图像保真度参数。
+
+## 可提交给生图工具的提示词模板
 
 ```text
 # 豚说插图提示词
 
 你是资深潮玩 IP 视觉导演与 3D 角色设计师。
 
-生成一张豚说官方 IP 插图。画幅：{generation_ratio}。用途：{use_case}。构图：{composition_id}。
-
-## 输入图像
-
-- image1 / input image：{reference_image_path}
-- 参考图作用：锁定豚豚身份、外貌比例、徽章和材质；不是仅供 Agent 阅读的说明图
-- 参考图策略：{identity_reference_and_pose_reference}
+生成一张豚说官方 IP 插图。平台：{platform}。发布位置：{placement}。画幅：{generation_ratio}。目标像素：{target_pixels}。用途：{use_case}。构图：{composition_id}。
 
 ## 主题输入
 
 - 主题：{topic}
+- 版式安全区：{safe_area_and_crop_notes}
+- 平台视觉适配：{platform_layout_style}
+- 图中文字（同一次生成）：{copy_text}
+- 字体视觉方向：标题采用得意黑风格，说明文字采用思源黑体风格；文字随插画直接生成，不生成无字底图、不再单独排字
 - 情绪：{mood}
 - 道具：{props_or_none}
 - 背景：{background}
@@ -42,4 +57,4 @@
 生成器实际收到参考图；一眼能认出参考图中的豚豚；纯天蓝身体、三层徽章、两个宽间距圆点、单个圆钝突起、奶白脸和毛毡短绒均通过 QA；豚豚承担一个关键动作，画面只表达一个认知锚点。
 ```
 
-把 `{composition_instructions}` 写成具体镜头语言（景别、朝向、肢体、道具位置），不要只写构图 id。若生成器不支持图像输入，只交付提示词草稿，不宣称已完成合格出图。
+把 `{composition_instructions}` 写成具体镜头语言（景别、朝向、肢体、道具位置），不要只写构图 id。平台尺寸参考 `scene-catalog.md`，优先遵循用户给出的尺寸，并在提示词中说明安全区。若生成器不支持图像输入，只交付提示词草稿，不宣称已完成合格出图。
