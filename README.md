@@ -1,4 +1,10 @@
-# 豚豚插画 Skill
+---
+title: Tun skill
+created: 2026-10-25
+updated: 2026-10-26
+---
+
+# Tun skill
 
 基于豚说 IP 的参考图驱动 3D 毛毡短绒认知插画 Skill。它把文章、方法论、知识库和活动主题转成可执行的插画提示词，让豚豚作为陪跑型吉祥物承担一个关键动作。
 
@@ -14,11 +20,15 @@
 
 ## 使用
 
+显示名称：**Tun skill**；技术标识 / 安装目录名：`tun-skill`（原名 `tuntun-illustrations`）。更新安装时替换旧版，避免同时加载两个副本。
+
+标题采用得意黑风格，说明采用思源黑体风格，与插画在同一次调用中生成。
+
 让 Agent 先读取 `SKILL.md`、`references/character-bible.md` 和 `references/reference-image-protocol.md`，再根据用途读取其他 `references/`、`styles/` 和 `assets/references/`。
 
 生成前必须确认当前模型支持图生图，并在实际调用参数或附件中核验参考图已经发送。WorkBuddy 的 Agnes 图改图使用 `agnes-image-2.0-flash`，参考图通过工具规定的 `extra_body.image` URL 数组传入；只有上传流程确实提供可访问 URL 时才执行。纯文生图、无法确认图片是否随请求发送，或只在提示词里写文件路径时，只交付提示词草稿，不把结果标为合格出图。
 
-适用：正文配图、公众号封面、小红书封面、X 封面、活动海报、Banner、个人知识库和 AI 工具主题插画。
+适用：正文配图、公众号封面、小红书封面、抖音视频封面 / 图文、X 信息流插图 / 长文封面 / 主页横幅、活动海报、Banner、个人知识库和 AI 工具主题插画。平台画幅与版式默认值见 `references/scene-catalog.md`；它们是制作建议，用户给出的尺寸和平台当前上传预览优先。
 
 ## 目录
 
