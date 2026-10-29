@@ -1,0 +1,4 @@
+interface:
+  display_name: "小金多平台内容改写"
+  short_description: "从同一母稿派生五个平台稿，保留事实、素材和审核链路"
+  default_prompt: "请用 $xiaojin-content-repurposer 把已选中的母稿改写为 X 长文章、小红书图文、抖音演示、公众号和飞书教程，并登记素材及待核验项。"

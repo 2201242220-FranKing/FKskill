@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.venv/
+douyin-video-breakdowns/
+assets/
+*.mp4
+*.mov
+*.m4a
+*.mp3

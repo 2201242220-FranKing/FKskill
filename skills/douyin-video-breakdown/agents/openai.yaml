@@ -1,0 +1,4 @@
+interface:
+  display_name: "Douyin Video Breakdown"
+  short_description: "Break down Douyin videos into reports and SOPs"
+  default_prompt: "Use $douyin-video-breakdown to analyze this Douyin video link into a transcript, keyframes, a breakdown report, and a replica SOP."

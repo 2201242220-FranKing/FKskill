@@ -1,0 +1,6 @@
+interface:
+  display_name: "小海豚 IP 生成"
+  short_description: "把自然语言转成小海豚校园宠物IP设定与Prompt"
+  default_prompt: "Use $xiaohaitun-ip-generator to 把下面的自然语言需求转成小海豚校园宠物IP设定卡和生成Prompt。"
+policy:
+  allow_implicit_invocation: true
