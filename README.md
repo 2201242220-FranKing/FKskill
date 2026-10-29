@@ -1,41 +1,54 @@
 ---
-title: Tun skill
-created: 2026-10-25
-updated: 2026-10-26
+title: FKskill
+created: 2026-10-29
+updated: 2026-10-29
 ---
 
-# Tun skill
+# FKskill
 
-基于豚说 IP 的参考图驱动 3D 毛毡短绒认知插画 Skill。它把文章、方法论、知识库和活动主题转成可执行的插画提示词，让豚豚作为陪跑型吉祥物承担一个关键动作。
+个人技能工具箱：主 Skill 负责路由，子 Skill 独立执行。参考 dbs 的组织方式，不复制其商业诊断内容。
 
-## 核心约束
+## 技能结构
 
-- `assets/references/` 中的图片必须作为生图请求的实际输入，不能只读不传。
-- 外貌严格参考图片：纯天蓝身体、奶白脸、两个宽间距圆点黑点、左上单个圆钝突起。
-- 胸口中央三层圆形徽章必须完整保留：奶白大圆盘 → 天蓝内圆 → 白色粗笔手写 `φ`。
-- 动作、表情和配饰可以按主题变化；水滴默认去掉。
-- 质感是细腻毛毡 / 麂皮短绒，不是蓬松长毛。
-- 风格偏好：3D、柔和、怪诞、清爽、留白。
-- 避免：白色腹部、蓝白斜切、猫耳、尖鳍、长条黑点、扁平、幼稚、商业海报感、PPT 感。
+```text
+FKskill/
+├── README.md
+└── skills/
+    ├── fkskill/
+    │   └── SKILL.md          # 主入口
+    └── tun-skill/           # Tun skill：插画与视觉设计
+        ├── SKILL.md
+        ├── README.md
+        ├── assets/references/
+        ├── references/
+        └── styles/
+```
 
-## 使用
+| 技能 | 定位 | 入口 |
+|---|---|---|
+| FKskill / `fkskill` | 识别需求，路由到子技能 | [主入口](skills/fkskill/SKILL.md) |
+| Tun skill / `tun-skill` | 豚豚 IP 插画、正文配图、封面、活动海报、Banner 与流程图 | [使用说明](skills/tun-skill/README.md) |
 
-显示名称：**Tun skill**；技术标识 / 安装目录名：`tun-skill`（原名 `tuntun-illustrations`）。更新安装时替换旧版，避免同时加载两个副本。
+## 安装
 
-标题采用得意黑风格，说明采用思源黑体风格，与插画在同一次调用中生成。
+克隆仓库：
 
-让 Agent 先读取 `SKILL.md`、`references/character-bible.md` 和 `references/reference-image-protocol.md`，再根据用途读取其他 `references/`、`styles/` 和 `assets/references/`。
+```sh
+git clone https://github.com/2201242220-FranKing/FKskill.git
+```
 
-生成前必须确认当前模型支持图生图，并在实际调用参数或附件中核验参考图已经发送。WorkBuddy 的 Agnes 图改图使用 `agnes-image-2.0-flash`，参考图通过工具规定的 `extra_body.image` URL 数组传入；只有上传流程确实提供可访问 URL 时才执行。纯文生图、无法确认图片是否随请求发送，或只在提示词里写文件路径时，只交付提示词草稿，不把结果标为合格出图。
+将 `skills/fkskill/` 与 `skills/tun-skill/` 两个完整目录复制到客户端的技能目录，例如 Codex 的 `~/.codex/skills/` 或 WorkBuddy 的 `~/.workbuddy/skills/`。不要只复制 SKILL.md，Tun skill 的参考图与支持文档必须一并保留。刷新或重启客户端以重新发现技能。
 
-适用：正文配图、公众号封面、小红书封面、抖音视频封面 / 图文、X 信息流插图 / 长文封面 / 主页横幅、活动海报、Banner、个人知识库和 AI 工具主题插画。平台画幅与版式默认值见 `references/scene-catalog.md`；它们是制作建议，用户给出的尺寸和平台当前上传预览优先。
+只需要插画设计，也可以单独安装 `tun-skill/`。升级时使用同名目录更新，避免同时保留旧版 `tuntun-illustrations` 而重复加载。安装 FKskill 时不需要把仓库根目录当作单个技能。
 
-## 目录
+## 使用示例
 
-- `SKILL.md`：主工作流
-- `references/character-bible.md`：角色圣经
-- `references/reference-image-protocol.md`：参考图实际输入协议
-- `references/prompt-blueprint.md`：两段式提示词蓝图
-- `references/tuntun-qa-checklist.md`：生成验收
-- `styles/fluffy-3d-tuntun/`：毛毡短绒 3D 风格原子
-- `assets/references/`：三视图、多表情和动作参考图
+- “用 FKskill 做一张 Obsidian 个人知识库 Banner。”
+- “用 Tun skill 生成小红书封面，标题是……”
+- “用 Tun skill 做 X 长文封面。”
+
+Tun skill 保留参考图实际输入、固定角色外貌、平台尺寸判断、X 长文封面 5:2，以及得意黑风格标题＋思源黑体风格说明一次直接生成的规则。主入口本身不提供生图模型或 API 密钥。
+
+## 扩展
+
+新增一个真正可用的技能时，在 `skills/<技能名>/` 中独立维护 SKILL.md 和资源，再更新 FKskill 路由表及本页技能表。目前仅收录 Tun skill。
