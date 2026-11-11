@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # FKskill 安装器：把 skills/ 下的独立技能装到 WorkBuddy 用户级技能目录。
 # 只创建/复制文件，不删除用户已有技能；覆盖前会先备份。
+# --fetch 优先走 raw.githubusercontent.com，不可达时自动改用 GitHub contents API。
 # 注意：中文文案里变量一律写成 ${VAR}，避免 bash 把全角标点吞进变量名。
 
 set -euo pipefail
@@ -17,6 +18,11 @@ FORCE=0
 CMD=""
 TARGET=""
 TMP_DIR=""
+FETCH_SOURCE="${FKSKILL_FETCH_SOURCE:-auto}"
+case "${FETCH_SOURCE}" in
+  auto|raw|api) ;;
+  *) printf '错误：FKSKILL_FETCH_SOURCE 只能是 auto / raw / api\n' >&2; exit 1 ;;
+esac
 
 log() { printf '%s\n' "$*"; }
 die() { printf '错误：%s\n' "$*" >&2; exit 1; }
@@ -43,14 +49,16 @@ FKskill 安装器
 
 环境变量：
   FKSKILL_OWNER / FKSKILL_REPO / FKSKILL_BRANCH   远程仓库与分支
+  FKSKILL_FETCH_SOURCE                             auto(默认) / raw / api，--fetch 下载通道
   WORKBUDDY_SKILLS_DIR                             安装目录（默认 ~/.workbuddy/skills）
 
 示例：
   ./install.sh --all
   ./install.sh --only tuntun-forum
   bash install.sh --fetch tuntun-forum
+  FKSKILL_FETCH_SOURCE=api bash install.sh --fetch tuntun-forum
 
-单装的子技能不依赖其他技能目录；--fetch 需要 curl 与 python3，且要求目标技能已推送到远程 main 分支。
+单装的子技能不依赖其他技能目录；--fetch 需要 curl 与 python3，且要求目标技能已推送到远程 main 分支。raw 通道不可达时自动改用 GitHub contents API（国内网络常见）。
 EOF
 }
 
@@ -123,6 +131,34 @@ do_only() {
   install_from "${name}" "${src}"
 }
 
+fetch_file() {
+  local path="$1" dest="$2" raw_url api_url tmpjson
+  if [ "${FETCH_SOURCE}" = "raw" ] || [ "${FETCH_SOURCE}" = "auto" ]; then
+    raw_url="https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}"
+    if curl -fsSL --connect-timeout 5 --max-time 15 "${raw_url}" -o "${dest}" 2>/dev/null; then
+      FETCH_SOURCE="raw"
+      return 0
+    fi
+  fi
+  if [ "${FETCH_SOURCE}" = "auto" ]; then
+    log "  raw 通道不可达，自动改用 GitHub contents API 下载。"
+    FETCH_SOURCE="api"
+  fi
+  api_url="https://api.github.com/repos/${OWNER}/${REPO}/contents/${path}?ref=${BRANCH}"
+  tmpjson="${dest}.__json"
+  if ! curl -fsSL --connect-timeout 8 --max-time 25 -H "Accept: application/vnd.github+json" \
+       "${api_url}" -o "${tmpjson}" 2>/dev/null; then
+    rm -f "${tmpjson}"
+    return 1
+  fi
+  if python3 -c 'import base64,json,sys; d=json.load(open(sys.argv[1],encoding="utf-8")); c=d.get("content"); assert d.get("encoding")=="base64" and isinstance(c,str); open(sys.argv[2],"wb").write(base64.b64decode("".join(c.split())))' "${tmpjson}" "${dest}" 2>/dev/null; then
+    rm -f "${tmpjson}"
+    return 0
+  fi
+  rm -f "${tmpjson}"
+  return 1
+}
+
 do_fetch() {
   local name="$1" api paths count=0 path rel dest
   [ -n "${name}" ] || die "--fetch 需要技能名"
@@ -135,7 +171,7 @@ do_fetch() {
   fi
   TMP_DIR="$(mktemp -d)"
   api="https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1"
-  curl -fsSL "${api}" -o "${TMP_DIR}/tree.json" \
+  curl -fsSL --connect-timeout 8 --max-time 25 -H "Accept: application/vnd.github+json" "${api}" -o "${TMP_DIR}/tree.json" \
     || die "拉取仓库文件列表失败（检查 OWNER/REPO/BRANCH、网络或 API 限频）"
   paths="${TMP_DIR}/paths.txt"
   python3 - "${TMP_DIR}/tree.json" "${name}" > "${paths}" <<'PY'
@@ -158,8 +194,7 @@ PY
     rel="${path#skills/${name}/}"
     dest="${TMP_DIR}/skill/${rel}"
     mkdir -p "$(dirname "${dest}")"
-    curl -fsSL "https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${path}" -o "${dest}" \
-      || die "下载失败：${path}"
+    fetch_file "${path}" "${dest}" || die "下载失败：${path}"
     count=$((count + 1))
   done < "${paths}"
   [ "${count}" -gt 0 ] || die "仓库里没有找到 skills/${name}/（检查技能名与分支）"

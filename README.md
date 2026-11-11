@@ -49,7 +49,7 @@ GitHub 网页不支持只下载子目录，安装器提供 `--fetch`：通过 Gi
     cd FKskill
     git sparse-checkout set skills/tuntun-forum
 
-`--fetch` 需要 `curl` 与 `python3`，并读取远程 `main` 分支；可用 `FKSKILL_OWNER` / `FKSKILL_REPO` / `FKSKILL_BRANCH` 覆盖仓库与分支。
+`--fetch` 需要 `curl` 与 `python3`，并读取远程 `main` 分支；可用 `FKSKILL_OWNER` / `FKSKILL_REPO` / `FKSKILL_BRANCH` 覆盖仓库与分支。下载优先走 `raw.githubusercontent.com`，不可达时自动改走 GitHub contents API（国内网络常见），也可用 `FKSKILL_FETCH_SOURCE=api` 直接走 API。
 
 ### 手动复制（Codex 等）
 
