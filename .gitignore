@@ -1,0 +1,17 @@
+# FKskill 公开仓库：本地私有配置与运行产物一律不入库
+config.json
+state.json
+*.log
+*.tmp
+.DS_Store
+__pycache__/
+*.py[cod]
+dist/
+*.zip
+.env
+.env.*
+*_token*
+*secret*
+.backup/
+
+# 注意：config.example.json 是公开模板，必须入库，不要被上面规则误伤。
